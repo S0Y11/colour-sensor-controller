@@ -115,3 +115,97 @@ if (serial.print == ("Blue")) {
 delay(3000);
 
 }
+
+-------------------------------------------------------------------------
+
+
+
+#include <Keyboard.h>
+#include <TCS3200.h>
+
+#define S0_PIN 4
+#define S1_PIN 5
+#define S2_PIN 6
+#define S3_PIN 7
+#define OUT_PIN 8
+
+int Frequency = 0;
+
+void setup() {
+
+  pinMode(S0_PIN, OUTPUT);
+  pinMode(S1_PIN, OUTPUT);
+  pinMode(S2_PIN, OUTPUT);
+  pinMode(S3_PIN, OUTPUT);
+  pinMode(OUT_PIN, INPUT);
+
+
+
+digitalWrite(S0_PIN, HIGH);
+digitalWrite(S1_PIN, HIGH);
+
+Serial.begin(9600);
+
+delay(1000);
+}
+
+void loop(){
+
+ //read red
+digitalWrite(S2_PIN, LOW);
+digitalWrite(S3_PIN, LOW);
+Frequency = pulseIn(OUT_PIN, LOW);
+Serial.println("R:");
+Serial.print(Frequency);
+Serial.print(" ");
+delay(1000);
+//read green
+digitalWrite(S2_PIN, HIGH);
+digitalWrite(S3_PIN, HIGH);
+Frequency = pulseIn(OUT_PIN,LOW);
+Serial.println("G:");
+Serial.print(Frequency);
+Serial.print(" ");
+delay(1000);
+//read blue
+digitalWrite(S2_PIN, LOW);
+digitalWrite(S3_PIN, HIGH);
+Frequency = pulseIn(OUT_PIN, LOW);
+Serial.println("B:");
+Serial.print(Frequency);
+Serial.print(" ");
+delay(1000);
+
+
+if (("R:") <  ("G:") && ("B:")) {
+  Serial.println("Detected: Red");
+ 
+  delay(1000);
+
+} else {
+  Keyboard.releaseAll(); }
+
+delay(500);
+
+if (("G:") <  ("R:") && ("B:")) {
+  Serial.println("Detected: Green");
+ 
+  delay(1000);
+ 
+} else {
+  Keyboard.releaseAll(); }
+
+delay(500);
+
+  if (("B:") < ("R:") || ("G:")){ 
+  Serial.println("Detected: Blue"); 
+ 
+  delay(1000);
+  
+} else {
+   }
+
+delay(500);
+}
+ 
+
