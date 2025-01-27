@@ -12,4 +12,3 @@ https://github.com/nthnn/TCS3200
 https://www.waveshare.com/wiki/Color_Sensor#Overview
 
 --------------------------------
-
